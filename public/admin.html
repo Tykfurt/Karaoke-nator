@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Karaoke-inador — Admin</title>
+<link rel="stylesheet" href="/css/style.css">
+<style>
+  .qr-box { text-align:center; }
+  .qr-box img { border-radius: 12px; background:#fff; padding:10px; max-width: 220px; }
+  .link-text { font-size: 13px; color: var(--gold); word-break: break-all; margin-top:8px; }
+  .controls { display:flex; gap:10px; }
+  .controls button { flex:1; margin-top:0; }
+  .controls button.active { background: linear-gradient(90deg, var(--accent2), var(--accent)); color:#fff; }
+  .now-playing { display:flex; align-items:center; gap:12px; }
+  .now-playing .title { font-weight:700; font-size:17px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="logo">🛠️ ADMIN — KARAOKE-INADOR</div>
+
+  <div class="card" id="loginCard">
+    <label>PIN de administrador</label>
+    <input type="password" id="pin" placeholder="••••">
+    <button class="btn-primary" id="btnLogin">Entrar</button>
+  </div>
+
+  <div id="panel" style="display:none">
+    <div class="card qr-box">
+      <h3>Código QR para invitados</h3>
+      <div class="controls" style="margin-bottom:14px">
+        <button class="btn-secondary" id="tabLocal">📶 Wi-Fi local</button>
+        <button class="btn-secondary" id="tabPublic">🌍 Internet</button>
+      </div>
+      <img id="qrImg" alt="QR">
+      <div class="link-text" id="qrUrl"></div>
+      <div class="song-meta" id="tunnelStatus" style="margin-top:10px"></div>
+    </div>
+
+    <div class="card">
+      <h3>Reproductor</h3>
+      <div class="now-playing">
+        <div style="flex:1">
+          <div class="song-meta">Sonando ahora</div>
+          <div class="title" id="nowPlaying">— Nada en reproducción —</div>
+        </div>
+      </div>
+      <div class="controls" style="margin-top:14px">
+        <button class="btn-ok" id="btnPlay">▶ Play</button>
+        <button class="btn-secondary" id="btnPause">⏸ Pausa</button>
+        <button class="btn-secondary" id="btnNext">⏭ Siguiente</button>
+      </div>
+      <div class="song-meta" style="margin-top:10px">
+        Abre <a href="/player.html" target="_blank" style="color:var(--gold)">/player.html</a> en la pantalla/TV conectada.
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>Cola completa</h3>
+      <div id="queueList"></div>
+    </div>
+  </div>
+</div>
+
+<div class="modal-bg" id="editModal">
+  <div class="modal">
+    <h3>Editar nombre</h3>
+    <input type="text" id="editInput" maxlength="60">
+    <div class="btn-row">
+      <button class="btn-secondary" id="editCancel">Cancelar</button>
+      <button class="btn-ok" id="editSave">Guardar</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script src="/js/common.js"></script>
+<script src="/js/admin.js"></script>
+</body>
+</html>

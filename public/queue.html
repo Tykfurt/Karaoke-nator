@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Karaoke-inador — Cola</title>
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<div class="wrap">
+  <div class="top-nav">
+    <span id="who"></span>
+    <a href="#" id="btnLogout">Salir</a>
+  </div>
+  <div class="logo">🎤 KARAOKE-INADOR</div>
+
+  <div class="card">
+    <h3>Pedir una canción</h3>
+    <label>Link de YouTube</label>
+    <input type="url" id="youtubeUrl" placeholder="https://www.youtube.com/watch?v=...">
+    <label>Nombre para mostrar (opcional)</label>
+    <input type="text" id="displayName" placeholder="Ej: Mi favorita de despecho" maxlength="60">
+    <button class="btn-primary" id="btnAdd">Agregar a la cola ➕</button>
+  </div>
+
+  <div class="card">
+    <h3>Cola de canciones</h3>
+    <div id="queueList"></div>
+  </div>
+</div>
+
+<div class="modal-bg" id="editModal">
+  <div class="modal">
+    <h3>Editar nombre</h3>
+    <input type="text" id="editInput" maxlength="60">
+    <div class="btn-row">
+      <button class="btn-secondary" id="editCancel">Cancelar</button>
+      <button class="btn-ok" id="editSave">Guardar</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script src="/js/common.js"></script>
+<script src="/js/queue.js"></script>
+</body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Karaoke-inador — Pantalla</title>
+<style>
+  html, body { margin:0; padding:0; background:#000; height:100%; overflow:hidden; }
+  #player { position:absolute; inset:0; width:100vw; height:100vh; }
+  #overlay {
+    position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
+    flex-direction:column; color:#fff; font-family:'Segoe UI',sans-serif; text-align:center;
+    background:radial-gradient(circle at center, #1c0f30, #000 75%);
+  }
+  #overlay h1 { font-size:48px; background:linear-gradient(90deg,#ff2fa1,#ffcc33); -webkit-background-clip:text; background-clip:text; color:transparent; }
+  #overlay p { color:#b3a3d1; font-size:18px; }
+  #nextUp { position:absolute; bottom:16px; right:20px; color:#fff; font-family:sans-serif; font-size:16px; background:rgba(0,0,0,0.5); padding:8px 14px; border-radius:10px; }
+</style>
+</head>
+<body>
+<div id="overlay">
+  <h1>🎤 KARAOKE-INADOR</h1>
+  <p>Esperando que el admin le dé play...</p>
+</div>
+<div id="player" style="display:none"></div>
+<div id="nextUp" style="display:none"></div>
+
+<script src="https://www.youtube.com/iframe_api"></script>
+<script src="/js/common.js"></script>
+<script src="/js/player.js"></script>
+</body>
+</html>

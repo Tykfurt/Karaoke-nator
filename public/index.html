@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Karaoke-inador — Registro</title>
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<div class="wrap">
+  <div class="logo">🎤 KARAOKE-INADOR</div>
+  <div class="subtitle">Regístrate para pedir tu canción</div>
+
+  <div class="card" id="formCard">
+    <label>Tu nombre</label>
+    <input type="text" id="name" placeholder="Ej: Camila" maxlength="30">
+    <label>Número de mesa</label>
+    <input type="text" id="table" placeholder="Ej: 5" maxlength="10">
+    <button class="btn-primary" id="btnRegister">Entrar a la fiesta 🎶</button>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+function toast(msg, isError) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.className = 'toast show' + (isError ? ' error' : '');
+  setTimeout(() => t.className = 'toast', 2200);
+}
+
+// Si ya tiene token guardado, lo mandamos directo a la cola
+const existing = localStorage.getItem('karaoke_token');
+if (existing) {
+  fetch('/api/me', { headers: { 'x-token': existing } })
+    .then(r => r.ok ? window.location.href = '/queue.html' : null)
+    .catch(() => {});
+}
+
+document.getElementById('btnRegister').addEventListener('click', async () => {
+  const name = document.getElementById('name').value.trim();
+  const table = document.getElementById('table').value.trim();
+  if (!name || !table) return toast('Completa tu nombre y mesa', true);
+
+  const btn = document.getElementById('btnRegister');
+  btn.disabled = true;
+  try {
+    const res = await fetch('/api/register', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name, table })
+    });
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.error);
+    localStorage.setItem('karaoke_token', data.token);
+    localStorage.setItem('karaoke_name', data.name);
+    localStorage.setItem('karaoke_table', data.table);
+    window.location.href = '/queue.html';
+  } catch (e) {
+    toast(e.message || 'Error al registrarse', true);
+    btn.disabled = false;
+  }
+});
+</script>
+</body>
+</html>
